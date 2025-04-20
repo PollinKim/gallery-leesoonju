@@ -58,11 +58,9 @@
 
     .work-item {
       width: 300px;
-      height: 400px;
-      overflow: hidden;
-      object-fit: cover;
-      display: block; 
+      height: 400px; 
       background-color: #ddd;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -136,6 +134,18 @@
     .close:hover {
       color: #aaa;
     }
+    @media (max-width: 1024px) {
+  .work-item {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .work-item {
+    flex: 1 1 100%;
+  }
+}
+
   </style>
 </head>
 <body>
