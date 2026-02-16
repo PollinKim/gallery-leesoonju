@@ -1,349 +1,512 @@
 <!DOCTYPE html>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-    html {
-    scroll-behavior: smooth;
-  }
-
-    body {
-      margin: 0;
-      padding-top: 40px;
-      font-family: 'Playfair Display', serif;
-      background-color: #f5e7cc;
-      color: #2b2b2b;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 100px 20px 50px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .intro {
-      font-size: 18px;
-      margin-bottom: 20px;
-      line-height: 1.6;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .category {
-      padding-top: 80px;
-    }
-
-    .category h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #f5e7cc;
-      display: inline-block;
-      padding-bottom: 10px;
-    }
-
-    .works {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .work-item {
-      width: 300px;
-      height: 400px; 
-      background-color: #ddd;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: #666;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .work-item img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-
-    .work-item:hover {
-      transform: scale(1.03);
-    }
-
-    .footer {
-      margin-top: 80px;
-      font-size: 14px;
-    }
-
-    .footer a {
-      margin: 0 10px;
-      color: #2b2b2b;
-      text-decoration: none;
-      border-bottom: 1px solid #2b2b2b;
-    }
-
-    .footer a:hover {
-      opacity: 0.7;
-    }
-
-    /* 팝업 스타일 */
-    .popup {
-      display: none;
-      position: fixed;
-      z-index: 10;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .popup img {
-      max-width: 90%;
-      max-height: 90%;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    .popup:target {
-      display: flex;
-    }
-
-    .close {
-      position: absolute;
-      top: 40px;
-      right: 60px;
-      font-size: 30px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .category-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #f6f5f3;
-      padding: 10px 0;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .category-menu a {
-      margin: 0 20px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      color: #2b2b2b;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s;
-    }
-
-    .category-menu a:hover {
-      border-bottom: 2px solid #2b2b2b;
-    }
-
-    .close:hover {
-      color: #aaa;
-    }
-    @media (max-width: 1024px) {
-  .work-item {
-    flex: 1 1 calc(50% - 20px);
-  }
-}
-
-@media (max-width: 600px) {
-  .work-item {
-    flex: 1 1 100%;
-  }
-}
-</style>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>갤러리 이순주</title>
-<div class="category-menu">
-  <a href="#fantasy-section">별과 꿈의 환상여행</a>
-  <a href="#painting-section">회화</a>
-  <a href="#croquis-section">크로키</a>
-</div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이순주 — GALLERY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@100;300;400;500;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --black: #000;
+    --white: #fff;
+    --gray-400: #999;
+    --gray-600: #666;
+    --gray-800: #1a1a1a;
+    --gray-900: #0d0d0d;
+    --accent: #ff3c00;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-body: 'Noto Sans KR', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--gray-900); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: var(--white); }
+
+/* Loader */
+.loader { position: fixed; inset: 0; background: var(--black); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; }
+.loader.hide { animation: loaderOut 0.8s ease forwards; }
+@keyframes loaderOut { 0% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 100% 0); } }
+.loader-logo { font-family: var(--font-display); font-size: clamp(3rem, 12vw, 8rem); letter-spacing: 0.2em; animation: glitch 2s infinite; }
+.loader-bar { width: 200px; height: 2px; background: var(--gray-800); position: relative; overflow: hidden; }
+.loader-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--accent); animation: loading 1.5s ease forwards; }
+@keyframes loading { to { width: 100%; } }
+@keyframes glitch { 0%, 90%, 100% { transform: translate(0); } 92% { transform: translate(-2px, 1px); } 94% { transform: translate(2px, -1px); } 96% { transform: translate(-1px, 2px); } 98% { transform: translate(1px, -2px); } }
+
+/* Navigation */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); padding: 1rem 3rem; }
+.nav-logo { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.15em; text-decoration: none; color: var(--white); transition: color 0.3s; }
+.nav-logo:hover { color: var(--accent); }
+.nav-menu { display: flex; gap: 3rem; list-style: none; }
+.nav-menu a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); text-decoration: none; position: relative; transition: color 0.3s; }
+.nav-menu a:hover { color: var(--white); }
+.nav-menu a::before { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
+.nav-menu a:hover::before { width: 100%; }
+
+/* Menu Toggle */
+.menu-toggle { display: none; width: 32px; height: 20px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; }
+.menu-toggle span { height: 2px; background: var(--white); transition: all 0.3s; }
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+/* Mobile Nav */
+.mobile-nav { position: fixed; inset: 0; background: var(--black); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; clip-path: circle(0% at calc(100% - 3rem) 2rem); transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+.mobile-nav.active { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
+.mobile-nav a { font-family: var(--font-display); font-size: 3rem; color: var(--white); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+.mobile-nav a:hover { color: var(--accent); }
+
+/* Hero */
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--black); }
+.hero-bg { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; opacity: 0.15; transform: scale(1.1); }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+.hero-content { position: relative; z-index: 1; text-align: center; }
+.hero-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.5em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease 1.8s forwards; }
+.hero-title { font-family: var(--font-display); font-size: clamp(5rem, 20vw, 18rem); letter-spacing: 0.1em; line-height: 0.85; margin-bottom: 1rem; }
+.hero-title .line { display: block; overflow: hidden; }
+.hero-title .line span { display: inline-block; transform: translateY(100%); animation: revealText 1s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+.hero-title .line:nth-child(2) span { animation-delay: 0.1s; }
+.hero-subtitle { font-family: var(--font-serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; font-weight: 400; color: var(--gray-400); opacity: 0; animation: fadeUp 0.8s ease 2s forwards; }
+.hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; animation: fadeUp 0.8s ease 2.2s forwards; }
+.hero-scroll span { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray-600); }
+.scroll-indicator { width: 1px; height: 60px; background: var(--gray-800); position: relative; overflow: hidden; }
+.scroll-indicator::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px; background: var(--accent); animation: scrollPulse 1.5s ease-in-out infinite; }
+@keyframes scrollPulse { 0% { top: -30px; } 100% { top: 100%; } }
+@keyframes revealText { to { transform: translateY(0); } }
+@keyframes fadeUp { to { opacity: 1; } }
+
+/* Sections */
+section { padding: 10rem 0; position: relative; }
+.section-header { padding: 0 5vw; margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end; }
+.section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+.section-title { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); letter-spacing: 0.05em; line-height: 0.9; }
+.section-count { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 0.1em; color: var(--gray-600); }
+
+/* Featured Grid */
+.featured-section { background: var(--black); padding: 8rem 0; }
+.featured-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; padding: 0 5vw; }
+.featured-item { position: relative; overflow: hidden; cursor: pointer; }
+.featured-item::before { content: ''; display: block; padding-top: 120%; }
+.featured-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s; filter: grayscale(30%); }
+.featured-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
+.featured-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); opacity: 0; transition: opacity 0.4s; }
+.featured-item:hover .overlay { opacity: 1; }
+.featured-item .number { position: absolute; bottom: 1.5rem; left: 1.5rem; font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.1em; color: var(--white); opacity: 0; transform: translateY(20px); transition: all 0.4s ease 0.1s; }
+.featured-item:hover .number { opacity: 1; transform: translateY(0); }
+.featured-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
+.featured-item:nth-child(2) { grid-column: span 4; }
+.featured-item:nth-child(3) { grid-column: span 3; }
+.featured-item:nth-child(4) { grid-column: span 3; }
+.featured-item:nth-child(5) { grid-column: span 4; grid-row: span 2; }
+.featured-item:nth-child(6) { grid-column: span 5; }
+.featured-item:nth-child(7) { grid-column: span 4; }
+.featured-item:nth-child(8) { grid-column: span 4; }
+.featured-item:nth-child(9) { grid-column: span 4; }
+
+/* Scroll Gallery */
+.scroll-gallery { position: relative; padding: 0; overflow: hidden; }
+.scroll-track { display: flex; gap: 2vw; padding: 0 5vw; animation: marquee 60s linear infinite; }
+.scroll-track:hover { animation-play-state: paused; }
+.scroll-item { flex-shrink: 0; width: 25vw; position: relative; cursor: pointer; }
+.scroll-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.5s, filter 0.5s; filter: grayscale(20%); }
+.scroll-item:hover img { transform: scale(1.03); filter: grayscale(0%); }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Grid Gallery */
+.grid-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; padding: 0 5vw; }
+.grid-item { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
+.grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s; filter: grayscale(20%); }
+.grid-item:hover img { transform: scale(1.15); filter: grayscale(0%); }
+.grid-item::after { content: attr(data-num); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 3rem; color: var(--white); background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.3s; }
+.grid-item:hover::after { opacity: 1; }
+
+/* Croquis Film Strip */
+.croquis-section { background: var(--gray-900); overflow: hidden; }
+.film-strip { display: flex; gap: 1.5rem; padding: 4rem 0; animation: filmScroll 40s linear infinite; }
+.film-strip:hover { animation-play-state: paused; }
+.film-frame { flex-shrink: 0; width: 280px; background: var(--black); padding: 1rem; position: relative; cursor: pointer; }
+.film-frame::before, .film-frame::after { content: ''; position: absolute; top: 0; bottom: 0; width: 20px; background: repeating-linear-gradient(to bottom, var(--gray-800) 0px, var(--gray-800) 8px, transparent 8px, transparent 16px); }
+.film-frame::before { left: 0; }
+.film-frame::after { right: 0; }
+.film-frame img { width: calc(100% - 40px); margin-left: 20px; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(30%) contrast(1.1); transition: filter 0.4s; }
+.film-frame:hover img { filter: grayscale(0%) contrast(1); }
+@keyframes filmScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Quote Section */
+.quote-section { min-height: 80vh; display: flex; align-items: center; justify-content: center; background: var(--black); position: relative; overflow: hidden; }
+.quote-bg { position: absolute; inset: 0; opacity: 0.08; }
+.quote-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+.quote-content { position: relative; z-index: 1; text-align: center; max-width: 900px; padding: 2rem; }
+.quote-mark { font-family: var(--font-serif); font-size: 8rem; color: var(--accent); line-height: 1; margin-bottom: -3rem; }
+.quote-text { font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 400; line-height: 1.8; color: var(--white); margin-bottom: 2rem; }
+.quote-author { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray-600); }
+
+/* Footer */
+footer { padding: 6rem 5vw; background: var(--black); border-top: 1px solid var(--gray-800); }
+.footer-content { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4rem; }
+.footer-brand { font-family: var(--font-display); font-size: 4rem; letter-spacing: 0.1em; }
+.footer-links { display: flex; gap: 3rem; }
+.footer-links a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--gray-800); }
+.copyright { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gray-600); }
+.social-links { display: flex; gap: 1.5rem; }
+.social-links a { width: 40px; height: 40px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.social-links a:hover { border-color: var(--accent); background: var(--accent); }
+.social-links svg { width: 16px; height: 16px; fill: var(--white); }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s; }
+.lightbox.active { opacity: 1; visibility: visible; }
+.lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; transform: scale(0.9); transition: transform 0.4s; }
+.lightbox.active .lightbox-img { transform: scale(1); }
+.lightbox-close { position: absolute; top: 2rem; right: 2rem; width: 50px; height: 50px; background: none; border: 1px solid var(--gray-600); cursor: pointer; transition: all 0.3s; }
+.lightbox-close:hover { border-color: var(--accent); transform: rotate(90deg); }
+.lightbox-close::before, .lightbox-close::after { content: ''; position: absolute; top: 50%; left: 50%; width: 20px; height: 1px; background: var(--white); }
+.lightbox-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.lightbox-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--gray-600); width: 60px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.lightbox-nav:hover { border-color: var(--accent); background: var(--accent); }
+.lightbox-prev { left: 2rem; }
+.lightbox-next { right: 2rem; }
+.lightbox-nav svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 1.5; }
+.lightbox-info { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); text-align: center; }
+.lightbox-info .title { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.lightbox-info .counter { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray-600); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .featured-grid { grid-template-columns: repeat(6, 1fr); }
+    .featured-item:nth-child(1) { grid-column: span 6; grid-row: span 1; }
+    .featured-item:nth-child(2), .featured-item:nth-child(3), .featured-item:nth-child(4), .featured-item:nth-child(5) { grid-column: span 3; grid-row: span 1; }
+    .featured-item:nth-child(6) { grid-column: span 6; }
+    .featured-item:nth-child(7), .featured-item:nth-child(8), .featured-item:nth-child(9) { grid-column: span 2; }
+    .grid-gallery { grid-template-columns: repeat(3, 1fr); }
+    .scroll-item { width: 40vw; }
+}
+@media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-menu { display: none; }
+    .menu-toggle { display: flex; }
+    section { padding: 6rem 0; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .featured-grid { grid-template-columns: 1fr 1fr; }
+    .featured-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+    .featured-item:nth-child(1) { grid-column: span 2; }
+    .grid-gallery { grid-template-columns: repeat(2, 1fr); }
+    .scroll-item { width: 70vw; }
+    .film-frame { width: 200px; }
+    .footer-content { flex-direction: column; gap: 2rem; }
+    .footer-brand { font-size: 2.5rem; }
+    .lightbox-nav { display: none; }
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>이순주</h1>
-    <p class="intro">
-      그림을 그린다는 것은 상상 세 속으로 들어가<br>
-      나의 세계를 표현하고 그림을 바라보는 관객과 공감하며,<br>
-      나의 세계 속으로 초대하는 것이다.
-    </p>
 
-    <!-- 카테고리 1 -->
-    <div class="category" id="fantasy-section">
-      <h2>별과 꿈의 환상여행</h2>
-      <div class="works">
-        <!-- 작품 1~40 반복 -->
-        <!-- 예: fantasy1.webp ~ fantasy40.webp -->
-        <!-- 클릭 시 팝업으로 이동 -->
-        <!-- 아래 40개 자동 생성 -->
-        <!-- 이미지 파일은 /images/fantasy#.webp 에 있다고 가정 -->
-        <!-- ↓↓↓ 반복되는 영역 ↓↓↓ -->
-        <!-- 1~20개 -->
-        <a href="#fantasy1"><div class="work-item"><img src="images/fantasy1.webp" alt="작품 1"></div></a>
-        <a href="#fantasy2"><div class="work-item"><img src="images/fantasy2.webp" alt="작품 2"></div></a>
-        <a href="#fantasy3"><div class="work-item"><img src="images/fantasy3.webp" alt="작품 3"></div></a>
-        <a href="#fantasy4"><div class="work-item"><img src="images/fantasy4.webp" alt="작품 4"></div></a>
-        <a href="#fantasy5"><div class="work-item"><img src="images/fantasy5.webp" alt="작품 5"></div></a>
-        <a href="#fantasy6"><div class="work-item"><img src="images/fantasy6.webp" alt="작품 6"></div></a>
-        <a href="#fantasy7"><div class="work-item"><img src="images/fantasy7.webp" alt="작품 7"></div></a>
-        <a href="#fantasy8"><div class="work-item"><img src="images/fantasy8.webp" alt="작품 8"></div></a>
-        <a href="#fantasy9"><div class="work-item"><img src="images/fantasy9.webp" alt="작품 9"></div></a>
-        <a href="#fantasy10"><div class="work-item"><img src="images/fantasy10.webp" alt="작품 10"></div></a>
-        <a href="#fantasy11"><div class="work-item"><img src="images/fantasy11.webp" alt="작품 11"></div></a>
-        <a href="#fantasy12"><div class="work-item"><img src="images/fantasy12.webp" alt="작품 12"></div></a>
-        <a href="#fantasy13"><div class="work-item"><img src="images/fantasy13.webp" alt="작품 13"></div></a>
-        <a href="#fantasy14"><div class="work-item"><img src="images/fantasy14.webp" alt="작품 14"></div></a>
-        <a href="#fantasy15"><div class="work-item"><img src="images/fantasy15.webp" alt="작품 15"></div></a>
-        <a href="#fantasy16"><div class="work-item"><img src="images/fantasy16.webp" alt="작품 16"></div></a>
-        <a href="#fantasy17"><div class="work-item"><img src="images/fantasy17.webp" alt="작품 17"></div></a>
-        <a href="#fantasy18"><div class="work-item"><img src="images/fantasy18.webp" alt="작품 18"></div></a>
-        <a href="#fantasy19"><div class="work-item"><img src="images/fantasy19.webp" alt="작품 19"></div></a>
-        <a href="#fantasy20"><div class="work-item"><img src="images/fantasy20.webp" alt="작품 20"></div></a>
-        <!-- 21~40 -->
-        <a href="#fantasy21"><div class="work-item"><img src="images/fantasy21.webp" alt="작품 21"></div></a>
-        <a href="#fantasy22"><div class="work-item"><img src="images/fantasy22.webp" alt="작품 22"></div></a>
-        <a href="#fantasy23"><div class="work-item"><img src="images/fantasy23.webp" alt="작품 23"></div></a>
-        <a href="#fantasy24"><div class="work-item"><img src="images/fantasy24.webp" alt="작품 24"></div></a>
-        <a href="#fantasy25"><div class="work-item"><img src="images/fantasy25.webp" alt="작품 25"></div></a>
-        <a href="#fantasy26"><div class="work-item"><img src="images/fantasy26.webp" alt="작품 26"></div></a>
-        <a href="#fantasy27"><div class="work-item"><img src="images/fantasy27.webp" alt="작품 27"></div></a>
-        <a href="#fantasy28"><div class="work-item"><img src="images/fantasy28.webp" alt="작품 28"></div></a>
-        <a href="#fantasy29"><div class="work-item"><img src="images/fantasy29.webp" alt="작품 29"></div></a>
-        <a href="#fantasy30"><div class="work-item"><img src="images/fantasy30.webp" alt="작품 30"></div></a>
-        <a href="#fantasy31"><div class="work-item"><img src="images/fantasy31.webp" alt="작품 31"></div></a>
-        <a href="#fantasy32"><div class="work-item"><img src="images/fantasy32.webp" alt="작품 32"></div></a>
-        <a href="#fantasy33"><div class="work-item"><img src="images/fantasy33.webp" alt="작품 33"></div></a>
-        <a href="#fantasy34"><div class="work-item"><img src="images/fantasy34.webp" alt="작품 34"></div></a>
-        <a href="#fantasy35"><div class="work-item"><img src="images/fantasy35.webp" alt="작품 35"></div></a>
-        <a href="#fantasy36"><div class="work-item"><img src="images/fantasy36.webp" alt="작품 36"></div></a>
-        <!-- ↑↑↑ 반복 끝 ↑↑↑ -->
-      </div>
+<!-- Loader -->
+<div class="loader" id="loader">
+    <div class="loader-logo">이순주</div>
+    <div class="loader-bar"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="nav">
+    <a href="#" class="nav-logo">LEE SOONJU</a>
+    <ul class="nav-menu">
+        <li><a href="#fantasy">Fantasy</a></li>
+        <li><a href="#painting">Painting</a></li>
+        <li><a href="#croquis">Croquis</a></li>
+        <li><a href="https://www.instagram.com/ccrodel95" target="_blank">Instagram</a></li>
+    </ul>
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+</nav>
 
-    <!-- 카테고리 2 -->
-    <div class="category" id="painting-section">
-      <h2>회화</h2>
-      <div class="works">
-        <a href="#people1"><div class="work-item"><img src="images/people1.webp" alt="회화 1"></div></a>
-        <a href="#people2"><div class="work-item"><img src="images/people2.webp" alt="회화 2"></div></a>
-        <a href="#people3"><div class="work-item"><img src="images/people3.webp" alt="회화 3"></div></a>
-        <a href="#people4"><div class="work-item"><img src="images/people4.webp" alt="회화 4"></div></a>
-        <a href="#people5"><div class="work-item"><img src="images/people5.webp" alt="회화 5"></div></a>
-        <a href="#people6"><div class="work-item"><img src="images/people6.webp" alt="회화 6"></div></a>
-        <a href="#people7"><div class="work-item"><img src="images/people7.webp" alt="회화 7"></div></a>
-        <a href="#people8"><div class="work-item"><img src="images/people8.webp" alt="회화 8"></div></a>
-      </div>
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+    <a href="#fantasy">Fantasy</a>
+    <a href="#painting">Painting</a>
+    <a href="#croquis">Croquis</a>
+    <a href="https://www.instagram.com/ccrodel95" target="_blank">Instagram</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">Artist Portfolio</p>
+        <h1 class="hero-title">
+            <span class="line"><span>LEE</span></span>
+            <span class="line"><span>SOONJU</span></span>
+        </h1>
+        <p class="hero-subtitle">별과 꿈의 환상여행</p>
     </div>
-    
-
-    <!-- 카테고리 3 -->
-    <div class="category" id="croquis-section">
-      <h2>크로키</h2>
-      <div class="works">
-        <a href="#c1"><div class="work-item"><img src="images/c1.webp" alt="크로키 1"></div></a>
-        <a href="#c2"><div class="work-item"><img src="images/c2.webp" alt="크로키 2"></div></a>
-        <a href="#c3"><div class="work-item"><img src="images/c3.webp" alt="크로키 3"></div></a>
-        <a href="#c4"><div class="work-item"><img src="images/c4.webp" alt="크로키 4"></div></a>
-        <a href="#c5"><div class="work-item"><img src="images/c5.webp" alt="크로키 5"></div></a>
-        <a href="#c6"><div class="work-item"><img src="images/c6.webp" alt="크로키 6"></div></a>
-        <a href="#c7"><div class="work-item"><img src="images/c7.webp" alt="크로키 7"></div></a>
-        <a href="#c8"><div class="work-item"><img src="images/c8.webp" alt="크로키 8"></div></a>
-        <a href="#c9"><div class="work-item"><img src="images/c9.webp" alt="크로키 9"></div></a>
-        <a href="#c10"><div class="work-item"><img src="images/c10.webp" alt="크로키 10"></div></a>
-      </div>
+    <div class="hero-scroll">
+        <span>Scroll to explore</span>
+        <div class="scroll-indicator"></div>
     </div>
-    
+</section>
 
-    <div class="footer">
-      <a href="https://www.instagram.com/ccrodel95" target="_blank">Instagram</a>
-      <a href="https://smartstore.naver.com/leesoonju?NaPm=ct%3Dm9pelm9j%7Cci%3Dcheckout%7Ctr%3Dds%7Ctrx%3Dnull%7Chk%3Dddb8a1666b7542b356cf1129f7f0510e3850776d" target="_blank">Homepage</a>
+<!-- Quote -->
+<section class="quote-section">
+    <div class="quote-bg">
+        <img src="images/fantasy1.webp" alt="">
     </div>
-  </div>
+    <div class="quote-content reveal">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+            그림을 그린다는 것은 상상의 세계 속으로 들어가<br>
+            나의 세계를 표현하고 그림을 바라보는 관객과 공감하며,<br>
+            나의 세계 속으로 초대하는 것이다.
+        </p>
+        <p class="quote-author">— 이순주</p>
+    </div>
+</section>
 
-  <!-- 팝업 이미지 -->
-  <div id="fantasy1" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy1.webp" alt="작품 1"></div>
-  <div id="fantasy2" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy2.webp" alt="작품 2"></div>
-  <div id="fantasy3" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy3.webp" alt="작품 3"></div>
-  <div id="fantasy4" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy4.webp" alt="작품 4"></div>
-  <div id="fantasy5" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy5.webp" alt="작품 5"></div>
-  <div id="fantasy6" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy6.webp" alt="작품 6"></div>
-  <div id="fantasy7" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy7.webp" alt="작품 7"></div>
-  <div id="fantasy8" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy8.webp" alt="작품 8"></div>
-  <div id="fantasy9" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy9.webp" alt="작품 9"></div>
-  <div id="fantasy10" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy10.webp" alt="작품 10"></div>
-  <div id="fantasy11" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy11.webp" alt="작품 11"></div>
-  <div id="fantasy12" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy12.webp" alt="작품 12"></div>
-  <div id="fantasy13" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy13.webp" alt="작품 13"></div>
-  <div id="fantasy14" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy14.webp" alt="작품 14"></div>
-  <div id="fantasy15" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy15.webp" alt="작품 15"></div>
-  <div id="fantasy16" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy16.webp" alt="작품 16"></div>
-  <div id="fantasy17" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy17.webp" alt="작품 17"></div>
-  <div id="fantasy18" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy18.webp" alt="작품 18"></div>
-  <div id="fantasy19" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy19.webp" alt="작품 19"></div>
-  <div id="fantasy20" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy20.webp" alt="작품 20"></div>
-  <div id="fantasy21" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy21.webp" alt="작품 21"></div>
-  <div id="fantasy22" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy22.webp" alt="작품 22"></div>
-  <div id="fantasy23" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy23.webp" alt="작품 23"></div>
-  <div id="fantasy24" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy24.webp" alt="작품 24"></div>
-  <div id="fantasy25" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy25.webp" alt="작품 25"></div>
-  <div id="fantasy26" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy26.webp" alt="작품 26"></div>
-  <div id="fantasy27" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy27.webp" alt="작품 27"></div>
-  <div id="fantasy28" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy28.webp" alt="작품 28"></div>
-  <div id="fantasy29" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy29.webp" alt="작품 29"></div>
-  <div id="fantasy30" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy30.webp" alt="작품 30"></div>
-  <div id="fantasy31" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy31.webp" alt="작품 31"></div>
-  <div id="fantasy32" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy32.webp" alt="작품 32"></div>
-  <div id="fantasy33" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy33.webp" alt="작품 33"></div>
-  <div id="fantasy34" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy34.webp" alt="작품 34"></div>
-  <div id="fantasy35" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy35.webp" alt="작품 35"></div>
-  <div id="fantasy36" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/fantasy36.webp" alt="작품 36"></div>
-  <div id="people1" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people1.webp" alt="회화 1"></div>
-  <div id="people2" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people2.webp" alt="회화 2"></div>
-  <div id="people3" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people3.webp" alt="회화 3"></div>
-  <div id="people4" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people4.webp" alt="회화 4"></div>
-  <div id="people5" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people5.webp" alt="회화 5"></div>
-  <div id="people6" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people6.webp" alt="회화 6"></div>
-  <div id="people7" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people7.webp" alt="회화 7"></div>
-  <div id="people8" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/people8.webp" alt="회화 8"></div>
-  <div id="c1" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c1.webp" alt="크로키 1"></div>
-  <div id="c2" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c2.webp" alt="크로키 2"></div>
-  <div id="c3" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c3.webp" alt="크로키 3"></div>
-  <div id="c4" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c4.webp" alt="크로키 4"></div>
-  <div id="c5" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c5.webp" alt="크로키 5"></div>
-  <div id="c6" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c6.webp" alt="크로키 6"></div>
-  <div id="c7" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c7.webp" alt="크로키 7"></div>
-  <div id="c8" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c8.webp" alt="크로키 8"></div>
-  <div id="c9" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c9.webp" alt="크로키 9"></div>
-  <div id="c10" class="popup"><a href="javascript:void(0)" class="close" onclick="closePopup(this)">×</a><img src="images/c10.webp" alt="크로키 10"></div>
-  
-</body>
+<!-- Fantasy Section -->
+<section class="featured-section" id="fantasy">
+    <div class="section-header reveal">
+        <div>
+            <p class="section-label">Collection 01</p>
+            <h2 class="section-title">FANTASY</h2>
+        </div>
+        <span class="section-count">36 WORKS</span>
+    </div>
+    <div class="featured-grid" id="featuredGrid"></div>
+</section>
+
+<!-- Scroll Gallery -->
+<div class="scroll-gallery">
+    <div class="scroll-track" id="scrollTrack"></div>
+</div>
+
+<!-- Painting Section -->
+<section id="painting">
+    <div class="section-header reveal">
+        <div>
+            <p class="section-label">Collection 02</p>
+            <h2 class="section-title">PAINTING</h2>
+        </div>
+        <span class="section-count">8 WORKS</span>
+    </div>
+    <div class="grid-gallery" id="paintingGrid"></div>
+</section>
+
+<!-- Croquis Section -->
+<section class="croquis-section" id="croquis">
+    <div class="section-header reveal">
+        <div>
+            <p class="section-label">Collection 03</p>
+            <h2 class="section-title">CROQUIS</h2>
+        </div>
+        <span class="section-count">10 WORKS</span>
+    </div>
+    <div class="film-strip" id="filmStrip"></div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">이순주</div>
+        <div class="footer-links">
+            <a href="#fantasy">Fantasy</a>
+            <a href="#painting">Painting</a>
+            <a href="#croquis">Croquis</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p class="copyright">© 2024 LEE SOONJU. ALL RIGHTS RESERVED.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/ccrodel95" target="_blank" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://smartstore.naver.com/leesoonju" target="_blank" aria-label="Shop">
+                <svg viewBox="0 0 24 24"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="닫기"></button>
+    <button class="lightbox-nav lightbox-prev" aria-label="이전">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <img class="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="다음">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="lightbox-info">
+        <p class="title"></p>
+        <p class="counter"><span class="current">1</span> / <span class="total">36</span></p>
+    </div>
+</div>
+
 <script>
-  function closePopup(el) {
-    const popup = el.closest('.popup');
-    popup.style.display = 'none';
-    history.replaceState(null, null, ' ');  // 주소창의 #id 제거
-  }
+// Image paths based on your folder structure
+const images = {
+    fantasy: Array.from({length: 36}, (_, i) => `images/fantasy${i + 1}.webp`),
+    painting: Array.from({length: 8}, (_, i) => `images/people${i + 1}.webp`),
+    croquis: Array.from({length: 10}, (_, i) => `images/c${i + 1}.webp`)
+};
+
+// Populate Hero Background
+const heroBg = document.getElementById('heroBg');
+for (let i = 1; i <= 8; i++) {
+    heroBg.innerHTML += `<img src="images/fantasy${i}.webp" alt="" loading="lazy">`;
+}
+
+// Populate Featured Grid (first 9 fantasy images)
+const featuredGrid = document.getElementById('featuredGrid');
+for (let i = 0; i < 9; i++) {
+    featuredGrid.innerHTML += `
+        <div class="featured-item" data-gallery="fantasy" data-index="${i}">
+            <img src="${images.fantasy[i]}" alt="Fantasy ${i + 1}" loading="lazy">
+            <div class="overlay"></div>
+            <span class="number">${String(i + 1).padStart(2, '0')}</span>
+        </div>`;
+}
+
+// Populate Scroll Track (remaining fantasy images, doubled for infinite scroll)
+const scrollTrack = document.getElementById('scrollTrack');
+const fantasyRest = images.fantasy.slice(9);
+[...fantasyRest, ...fantasyRest].forEach((src, i) => {
+    scrollTrack.innerHTML += `
+        <div class="scroll-item" data-gallery="fantasy" data-index="${(i % fantasyRest.length) + 9}">
+            <img src="${src}" alt="" loading="lazy">
+        </div>`;
+});
+
+// Populate Painting Grid
+const paintingGrid = document.getElementById('paintingGrid');
+images.painting.forEach((src, i) => {
+    paintingGrid.innerHTML += `
+        <div class="grid-item" data-gallery="painting" data-index="${i}" data-num="${String(i + 1).padStart(2, '0')}">
+            <img src="${src}" alt="Painting ${i + 1}" loading="lazy">
+        </div>`;
+});
+
+// Populate Film Strip (doubled for infinite scroll)
+const filmStrip = document.getElementById('filmStrip');
+[...images.croquis, ...images.croquis].forEach((src, i) => {
+    filmStrip.innerHTML += `
+        <div class="film-frame" data-gallery="croquis" data-index="${i % images.croquis.length}">
+            <img src="${src}" alt="" loading="lazy">
+        </div>`;
+});
+
+// Loader
+window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 1800);
+});
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 100);
+});
+
+// Mobile menu
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+});
+
+mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+    });
+});
+
+// Scroll reveal
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lbImg = lightbox.querySelector('.lightbox-img');
+const lbTitle = lightbox.querySelector('.title');
+const lbCur = lightbox.querySelector('.current');
+const lbTotal = lightbox.querySelector('.total');
+let curGal = null, curIdx = 0;
+
+function openLB(g, i) {
+    curGal = g;
+    curIdx = i;
+    updateLB();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function updateLB() {
+    lbImg.src = images[curGal][curIdx];
+    lbTitle.textContent = `${curGal.toUpperCase()} ${String(curIdx + 1).padStart(2, '0')}`;
+    lbCur.textContent = curIdx + 1;
+    lbTotal.textContent = images[curGal].length;
+}
+
+function closeLB() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('[data-gallery]').forEach(el => {
+    el.addEventListener('click', () => openLB(el.dataset.gallery, +el.dataset.index));
+});
+
+lightbox.querySelector('.lightbox-close').addEventListener('click', closeLB);
+lightbox.addEventListener('click', e => e.target === lightbox && closeLB());
+
+lightbox.querySelector('.lightbox-prev').addEventListener('click', () => {
+    curIdx = (curIdx - 1 + images[curGal].length) % images[curGal].length;
+    updateLB();
+});
+
+lightbox.querySelector('.lightbox-next').addEventListener('click', () => {
+    curIdx = (curIdx + 1) % images[curGal].length;
+    updateLB();
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'ArrowLeft') lightbox.querySelector('.lightbox-prev').click();
+    if (e.key === 'ArrowRight') lightbox.querySelector('.lightbox-next').click();
+});
+
+// Touch swipe
+let touchX = 0;
+lightbox.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+lightbox.addEventListener('touchend', e => {
+    const d = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 50) d > 0 ? lightbox.querySelector('.lightbox-next').click() : lightbox.querySelector('.lightbox-prev').click();
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+});
 </script>
+</body>
 </html>
