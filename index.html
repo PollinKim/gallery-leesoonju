@@ -9,27 +9,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --black: #000;
+    --black: #0a0a0a;
     --white: #fff;
-    --off-white: #f0ede8;
-    --gray-100: #fafafa;
-    --gray-200: #e5e5e5;
-    --gray-400: #999;
-    --gray-600: #666;
-    --gray-800: #1a1a1a;
-    --gray-900: #0a0a0a;
-    --accent: #ff3c00;
-    --blue: #0038ff;
-    --green: #00ff85;
+    --cream: #f8f6f3;
+    --silver: #e8e8e8;
+    --gray-300: #c5c5c5;
+    --gray-400: #8a8a8a;
+    --gray-600: #555;
+    --gray-800: #1f1f1f;
+    --gray-900: #111;
+    --accent: #ff4d00;
+    --soft-blue: #d4e4ff;
+    --soft-pink: #ffe4ec;
+    --soft-mint: #e0f5f0;
     --font-display: 'Bebas Neue', sans-serif;
     --font-sans: 'Space Grotesk', 'Noto Sans KR', sans-serif;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-sans); background: var(--off-white); color: var(--gray-900); overflow-x: hidden; }
+body { font-family: var(--font-sans); background: var(--cream); color: var(--gray-900); overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--white); }
 
-/* Loader - Original Dark with Glitch */
+/* Loader */
 .loader { position: fixed; inset: 0; background: var(--black); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; }
 .loader.hide { animation: loaderOut 0.8s ease forwards; }
 @keyframes loaderOut { 0% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 100% 0); } }
@@ -59,7 +60,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem
 .mobile-nav.active { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
 .mobile-nav a { font-family: var(--font-display); font-size: 2.5rem; color: var(--white); text-decoration: none; letter-spacing: 0.1em; }
 
-/* Hero - Original Dark Style */
+/* Hero */
 .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--black); }
 .hero-bg { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; opacity: 0.15; transform: scale(1.1); }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
@@ -78,18 +79,88 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem
 @keyframes revealText { to { transform: translateY(0); } }
 @keyframes fadeUp { to { opacity: 1; } }
 
-/* Statement - NewJeans Style */
-.statement-section { padding: 15rem 8vw; background: var(--off-white); position: relative; }
-.statement-section::before { content: '"'; font-family: var(--font-display); font-size: 40vw; position: absolute; top: -5%; left: -5%; color: var(--white); line-height: 1; pointer-events: none; }
-.statement-content { max-width: 800px; position: relative; z-index: 1; }
-.statement-text { font-size: clamp(1.5rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.6; color: var(--gray-900); margin-bottom: 2rem; }
-.statement-text em { font-style: normal; color: var(--accent); }
-.statement-author { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); display: flex; align-items: center; gap: 1rem; }
-.statement-author::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+/* Statement - NewJeans/ILLIT Style */
+.statement-section { 
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+.statement-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+}
+.statement-bg-block {
+    flex: 1;
+    transition: all 0.5s ease;
+}
+.statement-bg-block:nth-child(1) { background: var(--soft-blue); opacity: 0.4; }
+.statement-bg-block:nth-child(2) { background: var(--soft-pink); opacity: 0.3; }
+.statement-bg-block:nth-child(3) { background: var(--soft-mint); opacity: 0.35; }
+.statement-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    padding: 4rem;
+    text-align: center;
+}
+.statement-symbol {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    line-height: 1;
+    color: var(--gray-900);
+    opacity: 0.08;
+    margin-bottom: -3rem;
+}
+.statement-text {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    line-height: 2.2;
+    color: var(--gray-800);
+    letter-spacing: -0.01em;
+}
+.statement-text .highlight {
+    display: inline;
+    background: linear-gradient(to top, var(--soft-pink) 40%, transparent 40%);
+    padding: 0 0.2em;
+}
+.statement-author {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.statement-author-line {
+    width: 50px;
+    height: 1px;
+    background: var(--gray-300);
+}
+.statement-author-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+}
+.statement-float {
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 10rem;
+    color: var(--gray-900);
+    opacity: 0.03;
+    pointer-events: none;
+    user-select: none;
+}
+.statement-float.top-left { top: 5%; left: 5%; }
+.statement-float.bottom-right { bottom: 5%; right: 5%; transform: rotate(180deg); }
 
-/* Section - Experimental Header */
+/* Section Header */
 .section-header { padding: 8rem 6vw 4rem; display: flex; align-items: flex-end; justify-content: space-between; }
-.section-header-left { }
 .section-num { font-family: var(--font-display); font-size: clamp(8rem, 20vw, 15rem); line-height: 0.8; color: transparent; -webkit-text-stroke: 1px var(--gray-300); margin-bottom: -1rem; }
 .section-title-wrap { display: flex; align-items: baseline; gap: 1rem; }
 .section-title { font-family: var(--font-display); font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: 0.05em; color: var(--gray-900); }
@@ -97,14 +168,13 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem
 .section-count { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; color: var(--gray-400); writing-mode: vertical-rl; }
 
 /* Fantasy - Bento Grid */
-.fantasy-section { padding: 0 0 10rem; background: var(--off-white); }
+.fantasy-section { padding: 0 0 10rem; background: var(--cream); }
 .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(8, 10vw); gap: 0.75rem; padding: 0 6vw; }
-.bento-item { position: relative; overflow: hidden; cursor: pointer; border-radius: 1rem; background: var(--gray-200); }
+.bento-item { position: relative; overflow: hidden; cursor: pointer; border-radius: 1rem; background: var(--silver); }
 .bento-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s; }
 .bento-item:hover img { transform: scale(1.1); }
 .bento-item::after { content: attr(data-num); position: absolute; bottom: 1rem; left: 1rem; font-family: var(--font-display); font-size: 1.2rem; color: var(--white); opacity: 0; transform: translateY(10px); transition: all 0.3s; }
 .bento-item:hover::after { opacity: 1; transform: translateY(0); }
-/* Bento Layout */
 .bento-item:nth-child(1) { grid-column: 1 / 5; grid-row: 1 / 4; }
 .bento-item:nth-child(2) { grid-column: 5 / 8; grid-row: 1 / 3; }
 .bento-item:nth-child(3) { grid-column: 8 / 10; grid-row: 1 / 3; }
@@ -120,7 +190,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem
 .bento-item:nth-child(13) { grid-column: 10 / 13; grid-row: 7 / 9; }
 
 /* Marquee Section */
-.marquee-section { padding: 6rem 0; background: var(--gray-900); overflow: hidden; position: relative; }
+.marquee-section { padding: 6rem 0; background: var(--gray-900); overflow: hidden; }
 .marquee-text { font-family: var(--font-display); font-size: clamp(4rem, 12vw, 10rem); color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2); white-space: nowrap; animation: marqueeText 20s linear infinite; }
 @keyframes marqueeText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 .marquee-gallery { display: flex; gap: 1.5rem; padding: 4rem 0; animation: marqueeGallery 40s linear infinite; }
@@ -135,19 +205,18 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem
 
 /* Painting - Card Stack */
 .painting-section { padding: 10rem 0; background: var(--white); }
-.painting-section .section-header { padding-bottom: 6rem; }
 .card-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; padding: 0 6vw; }
 .card-item { width: calc(25% - 3rem); min-width: 250px; cursor: pointer; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .card-item:hover { transform: translateY(-20px) rotate(-2deg); }
 .card-item:nth-child(even):hover { transform: translateY(-20px) rotate(2deg); }
-.card-inner { background: var(--off-white); padding: 1rem; border-radius: 0.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+.card-inner { background: var(--cream); padding: 1rem; border-radius: 0.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
 .card-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 0.25rem; }
 .card-caption { padding: 1rem 0.5rem 0.5rem; display: flex; justify-content: space-between; align-items: center; }
 .card-num { font-family: var(--font-display); font-size: 1.2rem; color: var(--gray-400); }
 .card-title { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; color: var(--gray-600); text-transform: uppercase; }
 
 /* Croquis - Scattered */
-.croquis-section { padding: 10rem 0; background: var(--off-white); position: relative; overflow: hidden; }
+.croquis-section { padding: 10rem 0; background: var(--cream); position: relative; overflow: hidden; }
 .croquis-section::before { content: 'CROQUIS'; font-family: var(--font-display); font-size: 25vw; position: absolute; bottom: -5%; right: -5%; color: var(--white); line-height: 1; pointer-events: none; }
 .scattered-grid { display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(6, 8vw); gap: 1rem; padding: 0 8vw; position: relative; z-index: 1; }
 .scattered-item { position: relative; cursor: pointer; border-radius: 0.5rem; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -219,7 +288,10 @@ footer { padding: 6rem 6vw; background: var(--gray-900); color: var(--white); }
     nav { padding: 1.5rem 2rem; }
     .nav-menu { display: none; }
     .menu-toggle { display: flex; }
-    .statement-section { padding: 8rem 6vw; }
+    .statement-section { min-height: auto; padding: 8rem 0; }
+    .statement-content { padding: 2rem; }
+    .statement-symbol { font-size: 5rem; margin-bottom: -2rem; }
+    .statement-bg-block:nth-child(2), .statement-bg-block:nth-child(3) { display: none; }
     .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 5rem 5vw 3rem; }
     .section-num { font-size: 6rem; }
     .section-count { writing-mode: horizontal-tb; }
@@ -240,7 +312,7 @@ footer { padding: 6rem 6vw; background: var(--gray-900); color: var(--white); }
 </head>
 <body>
 
-<!-- Loader - Original Glitch -->
+<!-- Loader -->
 <div class="loader" id="loader">
     <div class="loader-logo">이순주</div>
     <div class="loader-bar"></div>
@@ -270,7 +342,7 @@ footer { padding: 6rem 6vw; background: var(--gray-900); color: var(--white); }
     <a href="https://www.instagram.com/ccrodel95" target="_blank">Instagram</a>
 </div>
 
-<!-- Hero - Original Dark -->
+<!-- Hero -->
 <section class="hero">
     <div class="hero-bg" id="heroBg"></div>
     <div class="hero-content">
@@ -287,15 +359,29 @@ footer { padding: 6rem 6vw; background: var(--gray-900); color: var(--white); }
     </div>
 </section>
 
-<!-- Statement -->
+<!-- Statement - NewJeans/ILLIT Style -->
 <section class="statement-section">
+    <div class="statement-bg">
+        <div class="statement-bg-block"></div>
+        <div class="statement-bg-block"></div>
+        <div class="statement-bg-block"></div>
+    </div>
+    <div class="statement-float top-left">✦</div>
+    <div class="statement-float bottom-right">✦</div>
     <div class="statement-content reveal">
+        <div class="statement-symbol">✦</div>
         <p class="statement-text">
-            그림을 그린다는 것은 <em>상상의 세계</em> 속으로 들어가
-            나의 세계를 표현하고 그림을 바라보는 관객과 공감하며,
-            나의 세계 속으로 <em>초대</em>하는 것이다.
+            그림을 그린다는 것은<br>
+            <span class="highlight">상상의 세계</span> 속으로 들어가<br>
+            나의 세계를 표현하고<br>
+            그림을 바라보는 관객과 공감하며<br>
+            나의 세계 속으로 <span class="highlight">초대</span>하는 것이다
         </p>
-        <p class="statement-author">이순주</p>
+        <div class="statement-author">
+            <div class="statement-author-line"></div>
+            <span class="statement-author-name">이순주</span>
+            <div class="statement-author-line"></div>
+        </div>
     </div>
 </section>
 
@@ -408,7 +494,7 @@ const images = {
 const heroBg = document.getElementById('heroBg');
 for (let i = 1; i <= 8; i++) heroBg.innerHTML += `<img src="images/fantasy${i}.webp" alt="" loading="lazy">`;
 
-// Bento Grid (13 items)
+// Bento Grid
 const bentoGrid = document.getElementById('bentoGrid');
 for (let i = 0; i < 13; i++) {
     bentoGrid.innerHTML += `
@@ -417,7 +503,7 @@ for (let i = 0; i < 13; i++) {
         </div>`;
 }
 
-// Marquee Gallery (rest of fantasy)
+// Marquee Gallery
 const marqueeGallery = document.getElementById('marqueeGallery');
 const fantasyRest = images.fantasy.slice(13);
 [...fantasyRest, ...fantasyRest].forEach((src, i) => {
@@ -428,7 +514,7 @@ const fantasyRest = images.fantasy.slice(13);
         </div>`;
 });
 
-// Card Grid (Painting)
+// Card Grid
 const cardGrid = document.getElementById('cardGrid');
 images.painting.forEach((src, i) => {
     cardGrid.innerHTML += `
@@ -443,7 +529,7 @@ images.painting.forEach((src, i) => {
         </div>`;
 });
 
-// Scattered Grid (Croquis)
+// Scattered Grid
 const scatteredGrid = document.getElementById('scatteredGrid');
 images.croquis.forEach((src, i) => {
     scatteredGrid.innerHTML += `
