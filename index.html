@@ -6,205 +6,200 @@
 <title>이순주 — GALLERY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@100;300;400;500;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+KR:wght@200;300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 :root {
     --black: #000;
     --white: #fff;
-    --gray-400: #999;
-    --gray-600: #666;
-    --gray-800: #1a1a1a;
-    --gray-900: #0d0d0d;
-    --accent: #ff3c00;
+    --cream: #f9f7f4;
+    --warm-white: #fdfcfa;
+    --gray-300: #d4d0c8;
+    --gray-400: #a8a49c;
+    --gray-600: #6b6760;
+    --gray-800: #2a2825;
+    --gray-900: #1a1816;
+    --accent: #8b7355;
+    --accent-dark: #6b5a45;
     --font-display: 'Bebas Neue', sans-serif;
-    --font-serif: 'Playfair Display', serif;
-    --font-body: 'Noto Sans KR', sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Noto Serif KR', serif;
+    --font-body: 'Noto Serif KR', serif;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--gray-900); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--gray-800); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 ::selection { background: var(--accent); color: var(--white); }
 
 /* Loader */
-.loader { position: fixed; inset: 0; background: var(--black); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; }
-.loader.hide { animation: loaderOut 0.8s ease forwards; }
-@keyframes loaderOut { 0% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 100% 0); } }
-.loader-logo { font-family: var(--font-display); font-size: clamp(3rem, 12vw, 8rem); letter-spacing: 0.2em; animation: glitch 2s infinite; }
-.loader-bar { width: 200px; height: 2px; background: var(--gray-800); position: relative; overflow: hidden; }
-.loader-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--accent); animation: loading 1.5s ease forwards; }
+.loader { position: fixed; inset: 0; background: var(--gray-900); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; }
+.loader.hide { animation: loaderOut 1s ease forwards; }
+@keyframes loaderOut { 0% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+.loader-logo { font-family: var(--font-serif); font-size: clamp(2rem, 8vw, 5rem); font-weight: 300; letter-spacing: 0.3em; color: var(--white); }
+.loader-sub { font-family: var(--font-serif); font-size: 0.9rem; font-style: italic; color: var(--gray-400); letter-spacing: 0.1em; }
+.loader-bar { width: 150px; height: 1px; background: var(--gray-600); position: relative; overflow: hidden; margin-top: 1rem; }
+.loader-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--white); animation: loading 1.5s ease forwards; }
 @keyframes loading { to { width: 100%; } }
-@keyframes glitch { 0%, 90%, 100% { transform: translate(0); } 92% { transform: translate(-2px, 1px); } 94% { transform: translate(2px, -1px); } 96% { transform: translate(-1px, 2px); } 98% { transform: translate(1px, -2px); } }
 
 /* Navigation */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
-nav.scrolled { background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); padding: 1rem 3rem; }
-.nav-logo { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 0.15em; text-decoration: none; color: var(--white); transition: color 0.3s; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(249,247,244,0.95); backdrop-filter: blur(20px); padding: 1rem 4rem; box-shadow: 0 1px 0 rgba(0,0,0,0.05); }
+.nav-logo { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400; letter-spacing: 0.15em; text-decoration: none; color: var(--gray-800); transition: color 0.3s; }
 .nav-logo:hover { color: var(--accent); }
 .nav-menu { display: flex; gap: 3rem; list-style: none; }
-.nav-menu a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); text-decoration: none; position: relative; transition: color 0.3s; }
-.nav-menu a:hover { color: var(--white); }
-.nav-menu a::before { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
-.nav-menu a:hover::before { width: 100%; }
+.nav-menu a { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; color: var(--gray-600); text-decoration: none; position: relative; transition: color 0.3s; }
+.nav-menu a:hover { color: var(--gray-800); }
+.nav-menu a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s ease; }
+.nav-menu a:hover::after { width: 100%; }
 
 /* Menu Toggle */
-.menu-toggle { display: none; width: 32px; height: 20px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; }
-.menu-toggle span { height: 2px; background: var(--white); transition: all 0.3s; }
-.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.menu-toggle { display: none; width: 28px; height: 18px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 1001; }
+.menu-toggle span { height: 1px; background: var(--gray-800); transition: all 0.3s; }
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .menu-toggle.active span:nth-child(2) { opacity: 0; }
-.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* Mobile Nav */
-.mobile-nav { position: fixed; inset: 0; background: var(--black); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; clip-path: circle(0% at calc(100% - 3rem) 2rem); transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
-.mobile-nav.active { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
-.mobile-nav a { font-family: var(--font-display); font-size: 3rem; color: var(--white); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+.mobile-nav { position: fixed; inset: 0; background: var(--cream); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
+.mobile-nav.active { opacity: 1; visibility: visible; }
+.mobile-nav a { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--gray-800); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
 .mobile-nav a:hover { color: var(--accent); }
 
 /* Hero */
-.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--black); }
-.hero-bg { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; opacity: 0.15; transform: scale(1.1); }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
-.hero-content { position: relative; z-index: 1; text-align: center; }
-.hero-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.5em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease 1.8s forwards; }
-.hero-title { font-family: var(--font-display); font-size: clamp(5rem, 20vw, 18rem); letter-spacing: 0.1em; line-height: 0.85; margin-bottom: 1rem; }
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: var(--gray-900); }
+.hero-bg { position: absolute; inset: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: grayscale(30%); }
+.hero-content { position: relative; z-index: 1; text-align: center; color: var(--white); padding: 2rem; }
+.hero-eyebrow { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards; }
+.hero-title { font-family: var(--font-serif); font-size: clamp(3.5rem, 12vw, 10rem); font-weight: 300; letter-spacing: 0.2em; line-height: 1; margin-bottom: 1.5rem; }
 .hero-title .line { display: block; overflow: hidden; }
 .hero-title .line span { display: inline-block; transform: translateY(100%); animation: revealText 1s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
-.hero-title .line:nth-child(2) span { animation-delay: 0.1s; }
-.hero-subtitle { font-family: var(--font-serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; font-weight: 400; color: var(--gray-400); opacity: 0; animation: fadeUp 0.8s ease 2s forwards; }
-.hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; animation: fadeUp 0.8s ease 2.2s forwards; }
-.hero-scroll span { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray-600); }
-.scroll-indicator { width: 1px; height: 60px; background: var(--gray-800); position: relative; overflow: hidden; }
-.scroll-indicator::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px; background: var(--accent); animation: scrollPulse 1.5s ease-in-out infinite; }
-@keyframes scrollPulse { 0% { top: -30px; } 100% { top: 100%; } }
+.hero-title .line:nth-child(2) span { animation-delay: 0.15s; }
+.hero-subtitle { font-family: var(--font-serif); font-size: clamp(1rem, 2.5vw, 1.4rem); font-style: italic; font-weight: 300; color: var(--gray-300); opacity: 0; animation: fadeUp 0.8s ease 1.8s forwards; letter-spacing: 0.05em; }
+.hero-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; animation: fadeUp 0.8s ease 2s forwards; }
+.hero-scroll span { font-family: var(--font-serif); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray-400); }
+.scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gray-400), transparent); }
 @keyframes revealText { to { transform: translateY(0); } }
 @keyframes fadeUp { to { opacity: 1; } }
 
-/* Sections */
-section { padding: 10rem 0; position: relative; }
-.section-header { padding: 0 5vw; margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end; }
-.section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-.section-title { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); letter-spacing: 0.05em; line-height: 0.9; }
-.section-count { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 0.1em; color: var(--gray-600); }
+/* Artist Statement */
+.statement-section { padding: 12rem 8vw; background: var(--cream); display: flex; align-items: center; justify-content: center; }
+.statement-content { max-width: 700px; text-align: center; }
+.statement-mark { font-family: var(--font-serif); font-size: 4rem; color: var(--accent); line-height: 1; margin-bottom: 1rem; opacity: 0.5; }
+.statement-text { font-family: var(--font-serif); font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 300; line-height: 2.2; color: var(--gray-800); margin-bottom: 2rem; word-break: keep-all; }
+.statement-author { font-family: var(--font-serif); font-size: 0.9rem; font-style: italic; letter-spacing: 0.15em; color: var(--gray-600); }
+.statement-author::before { content: '— '; }
 
-/* Featured Grid */
-.featured-section { background: var(--black); padding: 8rem 0; }
-.featured-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; padding: 0 5vw; }
-.featured-item { position: relative; overflow: hidden; cursor: pointer; }
-.featured-item::before { content: ''; display: block; padding-top: 120%; }
-.featured-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s; filter: grayscale(30%); }
-.featured-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
-.featured-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); opacity: 0; transition: opacity 0.4s; }
-.featured-item:hover .overlay { opacity: 1; }
-.featured-item .number { position: absolute; bottom: 1.5rem; left: 1.5rem; font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.1em; color: var(--white); opacity: 0; transform: translateY(20px); transition: all 0.4s ease 0.1s; }
-.featured-item:hover .number { opacity: 1; transform: translateY(0); }
-.featured-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
-.featured-item:nth-child(2) { grid-column: span 4; }
-.featured-item:nth-child(3) { grid-column: span 3; }
-.featured-item:nth-child(4) { grid-column: span 3; }
-.featured-item:nth-child(5) { grid-column: span 4; grid-row: span 2; }
-.featured-item:nth-child(6) { grid-column: span 5; }
-.featured-item:nth-child(7) { grid-column: span 4; }
-.featured-item:nth-child(8) { grid-column: span 4; }
-.featured-item:nth-child(9) { grid-column: span 4; }
+/* Section Common */
+section { padding: 8rem 0; position: relative; }
+.section-header { padding: 0 8vw; margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--gray-300); padding-bottom: 2rem; }
+.section-label { font-family: var(--font-serif); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.section-title { font-family: var(--font-serif); font-size: clamp(2rem, 6vw, 4rem); font-weight: 300; letter-spacing: 0.1em; color: var(--gray-800); }
+.section-count { font-family: var(--font-serif); font-size: 0.9rem; letter-spacing: 0.1em; color: var(--gray-400); font-style: italic; }
 
-/* Scroll Gallery */
-.scroll-gallery { position: relative; padding: 0; overflow: hidden; }
-.scroll-track { display: flex; gap: 2vw; padding: 0 5vw; animation: marquee 60s linear infinite; }
+/* Featured Gallery - Masonry Style */
+.featured-section { background: var(--warm-white); padding: 8rem 0; }
+.masonry-grid { column-count: 3; column-gap: 1.5rem; padding: 0 8vw; }
+.masonry-item { break-inside: avoid; margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; }
+.masonry-item img { width: 100%; display: block; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s; }
+.masonry-item:hover img { transform: scale(1.03); }
+.masonry-item .item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%); opacity: 0; transition: opacity 0.4s; }
+.masonry-item:hover .item-overlay { opacity: 1; }
+.masonry-item .item-info { position: absolute; bottom: 1.5rem; left: 1.5rem; color: var(--white); opacity: 0; transform: translateY(10px); transition: all 0.4s ease 0.1s; }
+.masonry-item:hover .item-info { opacity: 1; transform: translateY(0); }
+.masonry-item .item-number { font-family: var(--font-serif); font-size: 0.8rem; letter-spacing: 0.2em; margin-bottom: 0.3rem; }
+.masonry-item .item-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.05em; }
+
+/* Horizontal Scroll Gallery */
+.scroll-section { padding: 6rem 0; background: var(--gray-900); overflow: hidden; }
+.scroll-section .section-header { border-bottom-color: var(--gray-600); }
+.scroll-section .section-title { color: var(--white); }
+.scroll-section .section-count { color: var(--gray-400); }
+.scroll-track { display: flex; gap: 1.5rem; padding: 0 8vw; animation: marquee 80s linear infinite; }
 .scroll-track:hover { animation-play-state: paused; }
-.scroll-item { flex-shrink: 0; width: 25vw; position: relative; cursor: pointer; }
-.scroll-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.5s, filter 0.5s; filter: grayscale(20%); }
-.scroll-item:hover img { transform: scale(1.03); filter: grayscale(0%); }
+.scroll-item { flex-shrink: 0; width: 22vw; min-width: 280px; position: relative; cursor: pointer; }
+.scroll-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.5s; }
+.scroll-item:hover img { transform: scale(1.02); }
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* Grid Gallery */
-.grid-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; padding: 0 5vw; }
-.grid-item { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
-.grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s; filter: grayscale(20%); }
-.grid-item:hover img { transform: scale(1.15); filter: grayscale(0%); }
-.grid-item::after { content: attr(data-num); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 3rem; color: var(--white); background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.3s; }
-.grid-item:hover::after { opacity: 1; }
+/* Painting Grid */
+.painting-section { background: var(--cream); }
+.painting-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0 8vw; }
+.painting-item { position: relative; overflow: hidden; cursor: pointer; }
+.painting-item img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.painting-item:hover img { transform: scale(1.05); }
+.painting-item .item-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; }
+.painting-item:hover .item-overlay { opacity: 1; }
+.painting-item .item-number { font-family: var(--font-serif); font-size: 1.5rem; color: var(--white); letter-spacing: 0.2em; }
 
-/* Croquis Film Strip */
-.croquis-section { background: var(--gray-900); overflow: hidden; }
-.film-strip { display: flex; gap: 1.5rem; padding: 4rem 0; animation: filmScroll 40s linear infinite; }
-.film-strip:hover { animation-play-state: paused; }
-.film-frame { flex-shrink: 0; width: 280px; background: var(--black); padding: 1rem; position: relative; cursor: pointer; }
-.film-frame::before, .film-frame::after { content: ''; position: absolute; top: 0; bottom: 0; width: 20px; background: repeating-linear-gradient(to bottom, var(--gray-800) 0px, var(--gray-800) 8px, transparent 8px, transparent 16px); }
-.film-frame::before { left: 0; }
-.film-frame::after { right: 0; }
-.film-frame img { width: calc(100% - 40px); margin-left: 20px; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(30%) contrast(1.1); transition: filter 0.4s; }
-.film-frame:hover img { filter: grayscale(0%) contrast(1); }
-@keyframes filmScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-/* Quote Section */
-.quote-section { min-height: 80vh; display: flex; align-items: center; justify-content: center; background: var(--black); position: relative; overflow: hidden; }
-.quote-bg { position: absolute; inset: 0; opacity: 0.08; }
-.quote-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
-.quote-content { position: relative; z-index: 1; text-align: center; max-width: 900px; padding: 2rem; }
-.quote-mark { font-family: var(--font-serif); font-size: 8rem; color: var(--accent); line-height: 1; margin-bottom: -3rem; }
-.quote-text { font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 400; line-height: 1.8; color: var(--white); margin-bottom: 2rem; }
-.quote-author { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray-600); }
+/* Croquis Section - Clean Gallery Style */
+.croquis-section { background: var(--warm-white); }
+.croquis-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; padding: 0 8vw; }
+.croquis-item { position: relative; overflow: hidden; cursor: pointer; background: var(--cream); }
+.croquis-item img { width: 100%; aspect-ratio: 3/4; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s; }
+.croquis-item:hover img { transform: scale(1.03); }
+.croquis-item .item-frame { position: absolute; inset: 8px; border: 1px solid transparent; transition: border-color 0.3s; pointer-events: none; }
+.croquis-item:hover .item-frame { border-color: var(--accent); }
 
 /* Footer */
-footer { padding: 6rem 5vw; background: var(--black); border-top: 1px solid var(--gray-800); }
+footer { padding: 6rem 8vw; background: var(--gray-900); color: var(--white); }
 .footer-content { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4rem; }
-.footer-brand { font-family: var(--font-display); font-size: 4rem; letter-spacing: 0.1em; }
-.footer-links { display: flex; gap: 3rem; }
-.footer-links a { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); text-decoration: none; transition: color 0.3s; }
-.footer-links a:hover { color: var(--accent); }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--gray-800); }
-.copyright { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gray-600); }
+.footer-brand { font-family: var(--font-serif); font-size: 2rem; font-weight: 300; letter-spacing: 0.2em; }
+.footer-contact { text-align: right; }
+.footer-contact p { font-family: var(--font-serif); font-size: 0.9rem; color: var(--gray-400); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+.footer-contact a { color: var(--white); text-decoration: none; transition: color 0.3s; }
+.footer-contact a:hover { color: var(--accent); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--gray-600); }
+.copyright { font-family: var(--font-serif); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gray-400); }
 .social-links { display: flex; gap: 1.5rem; }
-.social-links a { width: 40px; height: 40px; border: 1px solid var(--gray-800); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.social-links a { width: 36px; height: 36px; border: 1px solid var(--gray-600); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
 .social-links a:hover { border-color: var(--accent); background: var(--accent); }
-.social-links svg { width: 16px; height: 16px; fill: var(--white); }
+.social-links svg { width: 14px; height: 14px; fill: var(--white); }
 
 /* Lightbox */
 .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s; }
 .lightbox.active { opacity: 1; visibility: visible; }
-.lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; transform: scale(0.9); transition: transform 0.4s; }
+.lightbox-img { max-width: 85vw; max-height: 85vh; object-fit: contain; transform: scale(0.95); transition: transform 0.4s; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 .lightbox.active .lightbox-img { transform: scale(1); }
-.lightbox-close { position: absolute; top: 2rem; right: 2rem; width: 50px; height: 50px; background: none; border: 1px solid var(--gray-600); cursor: pointer; transition: all 0.3s; }
-.lightbox-close:hover { border-color: var(--accent); transform: rotate(90deg); }
-.lightbox-close::before, .lightbox-close::after { content: ''; position: absolute; top: 50%; left: 50%; width: 20px; height: 1px; background: var(--white); }
+.lightbox-close { position: absolute; top: 2rem; right: 2rem; width: 44px; height: 44px; background: none; border: 1px solid var(--gray-600); cursor: pointer; transition: all 0.3s; }
+.lightbox-close:hover { border-color: var(--white); transform: rotate(90deg); }
+.lightbox-close::before, .lightbox-close::after { content: ''; position: absolute; top: 50%; left: 50%; width: 16px; height: 1px; background: var(--white); }
 .lightbox-close::before { transform: translate(-50%, -50%) rotate(45deg); }
 .lightbox-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
-.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--gray-600); width: 60px; height: 60px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-.lightbox-nav:hover { border-color: var(--accent); background: var(--accent); }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--gray-600); width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.lightbox-nav:hover { border-color: var(--white); }
 .lightbox-prev { left: 2rem; }
 .lightbox-next { right: 2rem; }
-.lightbox-nav svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 1.5; }
+.lightbox-nav svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 1; }
 .lightbox-info { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); text-align: center; }
-.lightbox-info .title { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-.lightbox-info .counter { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray-600); }
+.lightbox-info .title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--white); }
+.lightbox-info .counter { font-family: var(--font-serif); font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gray-400); }
 
 /* Reveal */
-.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* Responsive */
+@media (max-width: 1200px) {
+    .masonry-grid { column-count: 2; }
+    .croquis-grid { grid-template-columns: repeat(4, 1fr); }
+}
 @media (max-width: 1024px) {
-    .featured-grid { grid-template-columns: repeat(6, 1fr); }
-    .featured-item:nth-child(1) { grid-column: span 6; grid-row: span 1; }
-    .featured-item:nth-child(2), .featured-item:nth-child(3), .featured-item:nth-child(4), .featured-item:nth-child(5) { grid-column: span 3; grid-row: span 1; }
-    .featured-item:nth-child(6) { grid-column: span 6; }
-    .featured-item:nth-child(7), .featured-item:nth-child(8), .featured-item:nth-child(9) { grid-column: span 2; }
-    .grid-gallery { grid-template-columns: repeat(3, 1fr); }
-    .scroll-item { width: 40vw; }
+    .painting-grid { grid-template-columns: repeat(3, 1fr); }
+    .scroll-item { width: 35vw; min-width: 240px; }
 }
 @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 1rem 1.5rem; }
     .nav-menu { display: none; }
     .menu-toggle { display: flex; }
-    section { padding: 6rem 0; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    .featured-grid { grid-template-columns: 1fr 1fr; }
-    .featured-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
-    .featured-item:nth-child(1) { grid-column: span 2; }
-    .grid-gallery { grid-template-columns: repeat(2, 1fr); }
-    .scroll-item { width: 70vw; }
-    .film-frame { width: 200px; }
+    section { padding: 5rem 0; }
+    .section-header { padding: 0 5vw; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .statement-section { padding: 6rem 5vw; }
+    .masonry-grid { column-count: 1; padding: 0 5vw; }
+    .painting-grid { grid-template-columns: repeat(2, 1fr); padding: 0 5vw; }
+    .croquis-grid { grid-template-columns: repeat(2, 1fr); padding: 0 5vw; }
+    .scroll-item { width: 70vw; min-width: 200px; }
     .footer-content { flex-direction: column; gap: 2rem; }
-    .footer-brand { font-size: 2.5rem; }
+    .footer-contact { text-align: left; }
     .lightbox-nav { display: none; }
 }
 </style>
@@ -214,17 +209,18 @@ footer { padding: 6rem 5vw; background: var(--black); border-top: 1px solid var(
 <!-- Loader -->
 <div class="loader" id="loader">
     <div class="loader-logo">이순주</div>
+    <div class="loader-sub">Artist Portfolio</div>
     <div class="loader-bar"></div>
 </div>
 
 <!-- Navigation -->
 <nav id="nav">
-    <a href="#" class="nav-logo">LEE SOONJU</a>
+    <a href="#" class="nav-logo">이순주</a>
     <ul class="nav-menu">
-        <li><a href="#fantasy">Fantasy</a></li>
-        <li><a href="#painting">Painting</a></li>
-        <li><a href="#croquis">Croquis</a></li>
-        <li><a href="https://www.instagram.com/ccrodel.art" target="_blank">Instagram</a></li>
+        <li><a href="#fantasy">별과 꿈의 환상여행</a></li>
+        <li><a href="#painting">회화</a></li>
+        <li><a href="#croquis">크로키</a></li>
+        <li><a href="https://www.instagram.com/ccrodel95" target="_blank">Instagram</a></li>
     </ul>
     <div class="menu-toggle" id="menuToggle">
         <span></span>
@@ -235,15 +231,17 @@ footer { padding: 6rem 5vw; background: var(--black); border-top: 1px solid var(
 
 <!-- Mobile Nav -->
 <div class="mobile-nav" id="mobileNav">
-    <a href="#fantasy">Fantasy</a>
-    <a href="#painting">Painting</a>
-    <a href="#croquis">Croquis</a>
+    <a href="#fantasy">별과 꿈의 환상여행</a>
+    <a href="#painting">회화</a>
+    <a href="#croquis">크로키</a>
     <a href="https://www.instagram.com/ccrodel95" target="_blank">Instagram</a>
 </div>
 
 <!-- Hero -->
 <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-bg">
+        <img src="images/fantasy1.webp" alt="" id="heroBgImg">
+    </div>
     <div class="hero-content">
         <p class="hero-eyebrow">Artist Portfolio</p>
         <h1 class="hero-title">
@@ -253,80 +251,76 @@ footer { padding: 6rem 5vw; background: var(--black); border-top: 1px solid var(
         <p class="hero-subtitle">별과 꿈의 환상여행</p>
     </div>
     <div class="hero-scroll">
-        <span>Scroll to explore</span>
-        <div class="scroll-indicator"></div>
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
     </div>
 </section>
 
-<!-- Quote -->
-<section class="quote-section">
-    <div class="quote-bg">
-        <img src="images/fantasy1.webp" alt="">
-    </div>
-    <div class="quote-content reveal">
-        <div class="quote-mark">"</div>
-        <p class="quote-text">
-            그림을 그린다는 것은 상상의 세계 속으로 들어가<br>
-            나의 세계를 표현하고 그림을 바라보는 관객과 공감하며,<br>
+<!-- Artist Statement -->
+<section class="statement-section">
+    <div class="statement-content reveal">
+        <div class="statement-mark">"</div>
+        <p class="statement-text">
+            그림을 그린다는 것은 상상의 세계 속으로 들어가
+            나의 세계를 표현하고 그림을 바라보는 관객과 공감하며,
             나의 세계 속으로 초대하는 것이다.
         </p>
-        <p class="quote-author">— 이순주</p>
+        <p class="statement-author">이순주</p>
     </div>
 </section>
 
-<!-- Fantasy Section -->
+<!-- Fantasy Section - Masonry -->
 <section class="featured-section" id="fantasy">
     <div class="section-header reveal">
         <div>
-            <p class="section-label">Collection 01</p>
-            <h2 class="section-title">FANTASY</h2>
+            <p class="section-label">Collection I</p>
+            <h2 class="section-title">별과 꿈의 환상여행</h2>
         </div>
-        <span class="section-count">36 WORKS</span>
+        <span class="section-count">36 works</span>
     </div>
-    <div class="featured-grid" id="featuredGrid"></div>
+    <div class="masonry-grid" id="masonryGrid"></div>
 </section>
 
-<!-- Scroll Gallery -->
-<div class="scroll-gallery">
+<!-- Fantasy Scroll -->
+<section class="scroll-section">
     <div class="scroll-track" id="scrollTrack"></div>
-</div>
+</section>
 
 <!-- Painting Section -->
-<section id="painting">
+<section class="painting-section" id="painting">
     <div class="section-header reveal">
         <div>
-            <p class="section-label">Collection 02</p>
-            <h2 class="section-title">PAINTING</h2>
+            <p class="section-label">Collection II</p>
+            <h2 class="section-title">회화</h2>
         </div>
-        <span class="section-count">8 WORKS</span>
+        <span class="section-count">8 works</span>
     </div>
-    <div class="grid-gallery" id="paintingGrid"></div>
+    <div class="painting-grid" id="paintingGrid"></div>
 </section>
 
 <!-- Croquis Section -->
 <section class="croquis-section" id="croquis">
     <div class="section-header reveal">
         <div>
-            <p class="section-label">Collection 03</p>
-            <h2 class="section-title">CROQUIS</h2>
+            <p class="section-label">Collection III</p>
+            <h2 class="section-title">크로키</h2>
         </div>
-        <span class="section-count">10 WORKS</span>
+        <span class="section-count">10 works</span>
     </div>
-    <div class="film-strip" id="filmStrip"></div>
+    <div class="croquis-grid" id="croquisGrid"></div>
 </section>
 
 <!-- Footer -->
 <footer>
     <div class="footer-content">
         <div class="footer-brand">이순주</div>
-        <div class="footer-links">
-            <a href="#fantasy">Fantasy</a>
-            <a href="#painting">Painting</a>
-            <a href="#croquis">Croquis</a>
+        <div class="footer-contact">
+            <p>작품 문의 및 구매</p>
+            <p><a href="https://smartstore.naver.com/leesoonju" target="_blank">smartstore.naver.com/leesoonju</a></p>
         </div>
     </div>
     <div class="footer-bottom">
-        <p class="copyright">© 2024 LEE SOONJU. ALL RIGHTS RESERVED.</p>
+        <p class="copyright">© 2024 Lee Soonju. All Rights Reserved.</p>
         <div class="social-links">
             <a href="https://www.instagram.com/ccrodel95" target="_blank" aria-label="Instagram">
                 <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -355,36 +349,33 @@ footer { padding: 6rem 5vw; background: var(--black); border-top: 1px solid var(
 </div>
 
 <script>
-// Image paths based on your folder structure
+// Image paths
 const images = {
     fantasy: Array.from({length: 36}, (_, i) => `images/fantasy${i + 1}.webp`),
     painting: Array.from({length: 8}, (_, i) => `images/people${i + 1}.webp`),
     croquis: Array.from({length: 10}, (_, i) => `images/c${i + 1}.webp`)
 };
 
-// Populate Hero Background
-const heroBg = document.getElementById('heroBg');
-for (let i = 1; i <= 8; i++) {
-    heroBg.innerHTML += `<img src="images/fantasy${i}.webp" alt="" loading="lazy">`;
-}
-
-// Populate Featured Grid (first 9 fantasy images)
-const featuredGrid = document.getElementById('featuredGrid');
-for (let i = 0; i < 9; i++) {
-    featuredGrid.innerHTML += `
-        <div class="featured-item" data-gallery="fantasy" data-index="${i}">
-            <img src="${images.fantasy[i]}" alt="Fantasy ${i + 1}" loading="lazy">
-            <div class="overlay"></div>
-            <span class="number">${String(i + 1).padStart(2, '0')}</span>
+// Populate Masonry Grid (first 12 fantasy images)
+const masonryGrid = document.getElementById('masonryGrid');
+for (let i = 0; i < 12; i++) {
+    masonryGrid.innerHTML += `
+        <div class="masonry-item reveal" data-gallery="fantasy" data-index="${i}">
+            <img src="${images.fantasy[i]}" alt="별과 꿈의 환상여행 ${i + 1}" loading="lazy">
+            <div class="item-overlay"></div>
+            <div class="item-info">
+                <p class="item-number">No. ${String(i + 1).padStart(2, '0')}</p>
+                <p class="item-title">별과 꿈의 환상여행</p>
+            </div>
         </div>`;
 }
 
-// Populate Scroll Track (remaining fantasy images, doubled for infinite scroll)
+// Populate Scroll Track (remaining fantasy images)
 const scrollTrack = document.getElementById('scrollTrack');
-const fantasyRest = images.fantasy.slice(9);
+const fantasyRest = images.fantasy.slice(12);
 [...fantasyRest, ...fantasyRest].forEach((src, i) => {
     scrollTrack.innerHTML += `
-        <div class="scroll-item" data-gallery="fantasy" data-index="${(i % fantasyRest.length) + 9}">
+        <div class="scroll-item" data-gallery="fantasy" data-index="${(i % fantasyRest.length) + 12}">
             <img src="${src}" alt="" loading="lazy">
         </div>`;
 });
@@ -393,23 +384,27 @@ const fantasyRest = images.fantasy.slice(9);
 const paintingGrid = document.getElementById('paintingGrid');
 images.painting.forEach((src, i) => {
     paintingGrid.innerHTML += `
-        <div class="grid-item" data-gallery="painting" data-index="${i}" data-num="${String(i + 1).padStart(2, '0')}">
-            <img src="${src}" alt="Painting ${i + 1}" loading="lazy">
+        <div class="painting-item reveal" data-gallery="painting" data-index="${i}">
+            <img src="${src}" alt="회화 ${i + 1}" loading="lazy">
+            <div class="item-overlay">
+                <span class="item-number">${String(i + 1).padStart(2, '0')}</span>
+            </div>
         </div>`;
 });
 
-// Populate Film Strip (doubled for infinite scroll)
-const filmStrip = document.getElementById('filmStrip');
-[...images.croquis, ...images.croquis].forEach((src, i) => {
-    filmStrip.innerHTML += `
-        <div class="film-frame" data-gallery="croquis" data-index="${i % images.croquis.length}">
-            <img src="${src}" alt="" loading="lazy">
+// Populate Croquis Grid
+const croquisGrid = document.getElementById('croquisGrid');
+images.croquis.forEach((src, i) => {
+    croquisGrid.innerHTML += `
+        <div class="croquis-item reveal" data-gallery="croquis" data-index="${i}">
+            <img src="${src}" alt="크로키 ${i + 1}" loading="lazy">
+            <div class="item-frame"></div>
         </div>`;
 });
 
 // Loader
 window.addEventListener('load', () => {
-    setTimeout(() => document.getElementById('loader').classList.add('hide'), 1800);
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 2000);
 });
 
 // Nav scroll effect
@@ -435,7 +430,11 @@ mobileNav.querySelectorAll('a').forEach(a => {
 
 // Scroll reveal
 const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), i * 50);
+        }
+    });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
@@ -447,6 +446,12 @@ const lbCur = lightbox.querySelector('.current');
 const lbTotal = lightbox.querySelector('.total');
 let curGal = null, curIdx = 0;
 
+const galleryNames = {
+    fantasy: '별과 꿈의 환상여행',
+    painting: '회화',
+    croquis: '크로키'
+};
+
 function openLB(g, i) {
     curGal = g;
     curIdx = i;
@@ -457,7 +462,7 @@ function openLB(g, i) {
 
 function updateLB() {
     lbImg.src = images[curGal][curIdx];
-    lbTitle.textContent = `${curGal.toUpperCase()} ${String(curIdx + 1).padStart(2, '0')}`;
+    lbTitle.textContent = `${galleryNames[curGal]} ${String(curIdx + 1).padStart(2, '0')}`;
     lbCur.textContent = curIdx + 1;
     lbTotal.textContent = images[curGal].length;
 }
