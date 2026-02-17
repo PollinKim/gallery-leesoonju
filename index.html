@@ -745,4 +745,166 @@ const images = {
 
 // Hero BG
 const heroBg = document.getElementById('heroBg');
-for (let i = 1; i <= 8; i++) heroBg.innerHTML +=
+for (let i = 1; i <= 8; i++) heroBg.innerHTML += `<img src="images/fantasy${i}.webp" alt="" loading="lazy">`;
+
+// Mosaic Grid (24 items)
+const mosaicGrid = document.getElementById('mosaicGrid');
+for (let i = 0; i < 24; i++) {
+    mosaicGrid.innerHTML += `
+        <div class="mosaic-item" data-gallery="fantasy" data-index="${i}" data-num="${String(i + 1).padStart(2, '0')}">
+            <img src="${images.fantasy[i]}" alt="" loading="lazy">
+        </div>`;
+}
+
+// Painting Grid
+const paintingGrid = document.getElementById('paintingGrid');
+images.painting.forEach((src, i) => {
+    paintingGrid.innerHTML += `
+        <div class="painting-item reveal" data-gallery="painting" data-index="${i}">
+            <div class="painting-inner">
+                <img src="${src}" alt="" loading="lazy">
+                <div class="painting-caption">
+                    <span class="painting-num">${String(i + 1).padStart(2, '0')}</span>
+                    <span class="painting-title">Painting</span>
+                </div>
+            </div>
+        </div>`;
+});
+
+// Croquis Grid
+const croquisGrid = document.getElementById('croquisGrid');
+images.croquis.forEach((src, i) => {
+    croquisGrid.innerHTML += `
+        <div class="croquis-item reveal" data-gallery="croquis" data-index="${i}">
+            <img src="${src}" alt="" loading="lazy">
+        </div>`;
+});
+
+// Loader
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('hide');
+    }, 1800);
+});
+
+// Mobile menu
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+    });
+});
+
+// Reveal
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lbImg = lightbox.querySelector('.lightbox-img');
+const lbTitle = lightbox.querySelector('.title');
+const lbCur = lightbox.querySelector('.current');
+const lbTotal = lightbox.querySelector('.total');
+let curGal = null, curIdx = 0;
+const galleryNames = { fantasy: '별과 꿈의 환상여행', painting: '회화', croquis: '크로키' };
+
+function openLB(g, i) {
+    curGal = g;
+    curIdx = i;
+    updateLB();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function updateLB() {
+    lbImg.src = images[curGal][curIdx];
+    lbTitle.textContent = `${galleryNames[curGal]} ${String(curIdx + 1).padStart(2, '0')}`;
+    lbCur.textContent = curIdx + 1;
+    lbTotal.textContent = images[curGal].length;
+}
+
+function closeLB() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('[data-gallery]').forEach(el => {
+    el.addEventListener('click', () => openLB(el.dataset.gallery, +el.dataset.index));
+});
+
+lightbox.querySelector('.lightbox-close').addEventListener('click', closeLB);
+lightbox.addEventListener('click', e => e.target === lightbox && closeLB());
+
+lightbox.querySelector('.lightbox-prev').addEventListener('click', () => {
+    curIdx = (curIdx - 1 + images[curGal].length) % images[curGal].length;
+    updateLB();
+});
+
+lightbox.querySelector('.lightbox-next').addEventListener('click', () => {
+    curIdx = (curIdx + 1) % images[curGal].length;
+    updateLB();
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'ArrowLeft') lightbox.querySelector('.lightbox-prev').click();
+    if (e.key === 'ArrowRight') lightbox.querySelector('.lightbox-next').click();
+});
+
+// Touch swipe
+let touchX = 0;
+lightbox.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+lightbox.addEventListener('touchend', e => {
+    const d = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 50) {
+        d > 0 ? lightbox.querySelector('.lightbox-next').click() : lightbox.querySelector('.lightbox-prev').click();
+    }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// View All Button - Show remaining fantasy images
+let showAll = false;
+document.getElementById('viewAllBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (!showAll) {
+        for (let i = 24; i < 36; i++) {
+            mosaicGrid.innerHTML += `
+                <div class="mosaic-item" data-gallery="fantasy" data-index="${i}" data-num="${String(i + 1).padStart(2, '0')}" style="grid-column: span 4; grid-row: span 2;">
+                    <img src="${images.fantasy[i]}" alt="" loading="lazy">
+                </div>`;
+        }
+        // Re-attach click events
+        document.querySelectorAll('[data-gallery="fantasy"]').forEach(el => {
+            el.addEventListener('click', () => openLB('fantasy', +el.dataset.index));
+        });
+        this.textContent = 'Show Less';
+        showAll = true;
+    } else {
+        const items = mosaicGrid.querySelectorAll('.mosaic-item');
+        for (let i = items.length - 1; i >= 24; i--) {
+            items[i].remove();
+        }
+        this.textContent = 'View All Works';
+        showAll = false;
+    }
+});
+</script>
+</body>
+</html>
